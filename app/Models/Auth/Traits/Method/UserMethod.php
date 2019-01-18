@@ -20,20 +20,21 @@ trait UserMethod
      */
     public function canChangePassword()
     {
-        return ! app('session')->has(config('access.socialite_session_name'));
+        return !app('session')->has(config('access.socialite_session_name'));
     }
 
     /**
      * @param bool $size
      *
      * @return bool|\Illuminate\Contracts\Routing\UrlGenerator|mixed|string
+     *
      * @throws \Illuminate\Container\EntryNotFoundException
      */
     public function getPicture($size = false)
     {
         switch ($this->avatar_type) {
             case 'gravatar':
-                if (! $size) {
+                if (!$size) {
                     $size = config('gravatar.default.size');
                 }
 
@@ -76,6 +77,19 @@ trait UserMethod
     }
 
     /**
+     * [hasPermissionForRoute description].
+     *
+     * @param [type] $routeName [description]
+     *
+     * @return bool [description]
+     */
+    public function hasPermissionForRoute($routeName): boolean
+    {
+        // Check to see if this route requires permission. If so, see if the user has it.
+        return !Permission::where('name', $routeName)->count() || $this->hasPermissionTo($routeName);
+    }
+
+    /**
      * @return bool
      */
     public function isActive()
@@ -96,6 +110,6 @@ trait UserMethod
      */
     public function isPending()
     {
-        return config('access.users.requires_approval') && ! $this->confirmed;
+        return config('access.users.requires_approval') && !$this->confirmed;
     }
 }

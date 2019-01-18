@@ -13,16 +13,15 @@ use App\Http\Controllers\Backend\Auth\User\UserConfirmationController;
  * All route names are prefixed with 'admin.auth'.
  */
 Route::group([
-    'prefix'     => 'auth',
-    'as'         => 'auth.',
-    'namespace'  => 'Auth',
-    'middleware' => 'role:'.config('access.users.admin_role'),
+    'prefix' => 'auth',
+    'as' => 'auth.',
+    'namespace' => 'Auth',
+    'middleware' => ['role:'.config('access.users.admin_role'), 'route-permission'],
 ], function () {
     /*
      * User Management
      */
     Route::group(['namespace' => 'User'], function () {
-
         /*
          * User Status'
          */
