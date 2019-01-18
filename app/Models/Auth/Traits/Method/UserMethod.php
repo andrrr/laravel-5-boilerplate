@@ -2,6 +2,8 @@
 
 namespace App\Models\Auth\Traits\Method;
 
+use Spatie\Permission\Models\Permission;
+
 /**
  * Trait UserMethod.
  */
