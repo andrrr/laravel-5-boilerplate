@@ -11,10 +11,8 @@ class AuthTableSeeder extends Seeder
 
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         $this->disableForeignKeys();
 
@@ -36,6 +34,7 @@ class AuthTableSeeder extends Seeder
         $this->call(UserTableSeeder::class);
         $this->call(PermissionRoleTableSeeder::class);
         $this->call(UserRoleTableSeeder::class);
+        $this->call(PermissionsTableSeeder::class);
 
         $this->enableForeignKeys();
     }
