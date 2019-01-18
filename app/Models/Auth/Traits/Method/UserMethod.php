@@ -85,7 +85,7 @@ trait UserMethod
      *
      * @return bool [description]
      */
-    public function hasPermissionForRoute($routeName): boolean
+    public function hasPermissionForRoute($routeName): bool
     {
         // Check to see if this route requires permission. If so, see if the user has it.
         return !Permission::where('name', $routeName)->count() || $this->hasPermissionTo($routeName);
